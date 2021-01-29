@@ -4,8 +4,9 @@ Link to the challange https://sqlzoo.net/wiki/Help_Desk
 
 ```SQL 
 select c.company_name, count(*) as cc
-from Customer c, Caller ca, Issue i
-where c.company_ref = ca.company_ref and ca.caller_id = i.caller_id
+from Customer c
+join Caller ca on c.company_ref = ca.company_ref
+join Issue i on ca.caller_id = i.caller_id
 group by c.company_name
 having count(*) > 18
 ```
