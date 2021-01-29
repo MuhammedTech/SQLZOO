@@ -55,7 +55,9 @@ group by a.shift_date, a.shift_type
 ## 10.  Caller 'Harry' claims that the operator who took his most recent call was abusive and insulting. Find out who took the call (full name) and when.
 ```SQL 
 select s.first_name, s.last_name, i.call_date
-from Staff s, Issue i ,Caller c
-where s.staff_code = i.taken_by and c.caller_id = i.caller_id and c.first_name = 'Harry'
+from Staff s 
+join Issue i on s.staff_code = i.taken_by
+join Caller c i.caller_id = c.caller_id 
+where c.first_name = 'Harry'
 order by i.call_date desc limit 1
 ```
