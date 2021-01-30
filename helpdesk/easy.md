@@ -80,7 +80,7 @@ group by cu.company_name,ca2.first_name,ca2.last_name
 having nc < 5
 ```
 
-# 9.  For each shift show the number of staff assigned. Beware that some roles may be NULL and that the same person might have been assigned to multiple roles (The roles are 'Manager', 'Operator', 'Engineer1', 'Engineer2').
+## 9.  For each shift show the number of staff assigned. Beware that some roles may be NULL and that the same person might have been assigned to multiple roles (The roles are 'Manager', 'Operator', 'Engineer1', 'Engineer2').
 ```SQL 
 select a.shift_date, a.shift_type, count(Distinct role) as cw
 from (
