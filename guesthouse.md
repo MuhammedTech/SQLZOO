@@ -42,3 +42,55 @@ from booking
 where guest_id in (1185, 1270)
 group by guest_id
 ```
+
+## 6.Ruth Cadbury. Show the total amount payable by guest Ruth Cadbury for her room bookings. You should JOIN to the rate table using room_type_requested and occupants.
+```SQL
+select sum(b.nights * r.amount) as 'SUM(nights*amount)'
+from rate r
+join booking b on r.room_type  = b.room_type_requested and r.occupancy = b.occupants
+join guest g on g.id = b.guest_id
+where g.first_name = 'Ruth' and g.last_name = 'Cadbury'
+```
+
+## 7.Including Extras. Calculate the total bill for booking 5346 including extras.
+```SQL 
+select r.amount + e.amount as 'SUM(amount)'
+from booking b
+
+join rate r on r.room_type = b.room_type_requested and r.occupancy = b.occupants
+
+join 
+         (select booking_id,sum(amount) as amount
+          from extra 
+          where booking_id = 5346
+          group by booking_id) as e
+on b.booking_id = e.booking_id
+where b.booking_id = 5346
+```
+
+## 8.Edinburgh Residents. For every guest who has the word “Edinburgh” in their address show the total number of nights booked. Be sure to include 0 for those guests who have never had a booking. Show last name, first name, address and number of nights. Order by last name then first name.
+```SQL 
+select g.last_name, g.first_name ,g.address,  sum(case when b.nights is null then 0 else b.nights end) as nights
+from guest g
+left join booking b
+on b.guest_id = g.id 
+where g.address like '%Edinburgh%'
+group by g.first_name, g.last_name, g.address
+order by g.last_name, g.first_name
+```
+
+
+## 9. How busy are we? For each day of the week beginning 2016-11-25 show the number of bookings starting that day. Be sure to show all the days of the week in the correct order.
+```SQL 
+select booking_date, count(arrival_time) as arrivals
+from booking
+where booking_date between ('2016-11-25') and ('2016-12-01')
+group by booking_date
+```
+
+## 10. How many guests? Show the number of guests in the hotel on the night of 2016-11-21. Include all occupants who checked in that day but not those who checked out.
+```SQL 
+select sum(occupants)
+from booking
+WHERE booking_date + INTERVAL nights DAY > '2016-11-21' AND booking_date <= '2016-11-21';
+```
