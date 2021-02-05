@@ -1,11 +1,11 @@
 Link to the challange https://sqlzoo.net/wiki/Help_Desk
 
-## 1. There are three issues that include the words "index" and "Oracle". Find the call_date for each of them
+## 1. Show the CompanyName for James D. Kramer
 
 ```SQL 
-select DATE_FORMAT(call_date, '%Y-%m-%d %T.%f'), call_ref
-from Issue
-where Detail like '%index%' and Detail like '%Oracle%'
+select CompanyName
+from Customer
+where FirstName = 'James' and MiddleName = 'D.' and LastName = 'Kramer'
 ```
 
 ## 2. Show all the addresses listed for 'Modular Cycle Systems'
