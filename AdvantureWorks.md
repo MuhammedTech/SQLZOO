@@ -1,4 +1,4 @@
-Link to the challange https://sqlzoo.net/wiki/Help_Desk
+Link to the challange https://sqlzoo.net/wiki/AdventureWorks
 
 ## 1. Show the CompanyName for James D. Kramer
 
