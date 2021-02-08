@@ -1,5 +1,7 @@
 Link to the challange https://sqlzoo.net/wiki/AdventureWorks
 
+/* Sample Queries */
+
 ## 1. Show the CompanyName for James D. Kramer
 
 ```SQL 
@@ -33,6 +35,15 @@ join Customer c
 on c.CustomerID = soh.CustomerID
 where soh.CustomerID = 635
 ```
+
+/* Easy to Hard */
+
+## 1. 
+
+```SQL 
+
+```
+
 
 ## 6. A "Single Item Order" is a customer order where only one item is ordered. Show the SalesOrderID and the UnitPrice for every Single Item Order.
 
@@ -123,9 +134,11 @@ where a.City = 'London'
 ```
 
 
+
+
 /* Resit Questions */
 
-## 4. List the SalesOrderNumber for the customer 'Good Toys' 'Bike World'
+## 1. List the SalesOrderNumber for the customer 'Good Toys' 'Bike World'
 ```SQL
 select SalessOrderNumber
 from SalesOrderHeader
@@ -133,7 +146,7 @@ join Customer
 on Customer.CustomerID = SalesOrderHeader.CustomerID
 where CompanyName in ('Good Toys', 'Bike World')
 ```
-## 5. List the ProductName and the quantity of what was ordered by 'Futuristic Bikes'
+## 2. List the ProductName and the quantity of what was ordered by 'Futuristic Bikes'
 ```SQL
 select
   p.Name,
@@ -149,7 +162,7 @@ where c.CompanyName = 'Futuristic Bikes';
 ```
 
 
-## 6. List the name and addresses of companies containing the word 'Bike' (upper or lower case) and companies containing 'cycle' (upper or lower case). Ensure that the 'bike's are listed before the 'cycles's.
+## 3. List the name and addresses of companies containing the word 'Bike' (upper or lower case) and companies containing 'cycle' (upper or lower case). Ensure that the 'bike's are listed before the 'cycles's.
 ```SQL
 select c.CompanyName, a.AddressLine1
 from Customer c
@@ -161,7 +174,7 @@ where CompanyName regexp 'Bike | cycle'
 order by CompanyName like  '%Bike%' desc
 ```
 
-## 7. Show the total order value for each CountryRegion. List by value with the highest first.
+## 4. Show the total order value for each CountryRegion. List by value with the highest first.
 ```SQL
 select a.CountyRegion, sum(soh.SubTotal)
 from Address a
