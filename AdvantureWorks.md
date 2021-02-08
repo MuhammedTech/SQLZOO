@@ -38,9 +38,53 @@ where soh.CustomerID = 635
 
 /* Easy to Hard */
 
-## 1. 
+## 1. Show the first name and the email address of customer with CompanyName 'Bike World'
 
 ```SQL 
+select firstname, emailaddress
+from Customer
+where companyname = 'Bike World'
+```
+
+## 2. Show the CompanyName for all customers with an address in City 'Dallas'. 
+
+```SQL 
+select companyname
+from Customer c
+join CustomerAddress ca on ca.CustomerID = c.CustomerID
+join Address a on a.AddressId = ca.AddressID
+where a.City = 'Dallas'
+```
+
+## 3. How many items with ListPrice more than $1000 have been sold? 
+
+```SQL 
+select count(*) as Total
+from SalesOrderDetail sod
+join Product p on p.ProductID = sod.ProductID
+where p.listprice > 1000
+```
+
+## 4. Give the CompanyName of those customers with orders over $100000. Include the subtotal plus tax plus freight.
+
+```SQL 
+select c.companyname, sum(soh.SubTotal + soh.TaxAmt + soh.Freight)
+from Customer c
+join SalesOrderHeader soh 
+on c.CustomerID = soh.CustomerID
+group by c.companyname
+having sum(soh.SubTotal + soh.TaxAmt + soh.Freight) > 100000;
+```
+
+## 5. Find the number of left racing socks ('Racing Socks, L') ordered by CompanyName 'Riding Cycles'
+
+```SQL 
+select sum(sod.orderqty)
+from Product p
+join SalesOrderDetail sod on sod.productid = p.productid
+join SalesOrderHeader soh on soh.salesorderid = sod.salesorderid
+join Customer c on c.customerid = soh.customerid
+where p.name = 'Racing Socks, L' and c.Companyname = 'Riding Cycles'
 
 ```
 
